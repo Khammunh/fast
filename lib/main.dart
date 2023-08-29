@@ -1,43 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 void main() {
   runApp(
     const MyApp(),
   );
 }
-
-Widget titleSection = Container(
-  padding: const EdgeInsets.all(32),
-  child: Row(
-    children: [
-      Expanded(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              padding: const EdgeInsets.only(bottom: 8),
-              child: const Text(
-                'Oeschinen Lake Compground',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            )
-          ],
-        ),
-      ),
-      Text(
-        'Kandersteg, switzerland',
-        style: TextStyle(
-          color: Colors.grey[500],
-        ),
-      ),
-      Icon(
-        Icons.star,
-        color: Colors.red[500],
-      ),
-      const Text('41')
-    ],
-  ),
-);
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -46,14 +14,30 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter layout demo',
+      title: 'Create a horizontal list',
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Flutter Layout Demo'),
+          title: const Text('Create a horizontal list'),
         ),
-        body: Column(
+        body: ListView(
+          scrollDirection: Axis.horizontal,
           children: [
-            titleSection,
+            Container(
+              width: 160,
+              color: Colors.red,
+            ),
+            Container(
+              width: 160,
+              color: Colors.blue,
+            ),
+            Container(
+              width: 160,
+              color: Colors.yellow,
+            ),
+            Container(
+              width: 160,
+              color: Colors.orange,
+            ),
           ],
         ),
       ),
