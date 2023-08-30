@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 void main() {
   runApp(
@@ -13,32 +12,24 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Create a horizontal list',
+      title: 'again Grid List',
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Create a horizontal list'),
+          title: const Text('Grid List'),
         ),
-        body: ListView(
-          scrollDirection: Axis.horizontal,
-          children: [
-            Container(
-              width: 160,
-              color: Colors.red,
-            ),
-            Container(
-              width: 160,
-              color: Colors.blue,
-            ),
-            Container(
-              width: 160,
-              color: Colors.yellow,
-            ),
-            Container(
-              width: 160,
-              color: Colors.orange,
-            ),
-          ],
+        body: GridView.count(
+          crossAxisCount: 2,
+          children: List.generate(
+            100,
+            (index) {
+              return Center(
+                child: Text(
+                  'Item $index',
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+              );
+            },
+          ),
         ),
       ),
     );
