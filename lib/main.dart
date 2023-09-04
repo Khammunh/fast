@@ -6,18 +6,25 @@ void main() {
   );
 }
 
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(body: CustomScrollView(
-        slivers: [
-          
-        ],
-      )),
+    const title = 'Place 22';
+    return const MaterialApp(
+      home: Scaffold(
+        body: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              title: Text(title),
+              floating: true,
+              flexibleSpace: Placeholder(),
+              expandedHeight: 200,
+            )
+          ],
+        ),
+      ),
     );
   }
 }
