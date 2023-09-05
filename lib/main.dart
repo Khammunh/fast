@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+
+const Color darkBlue = Color.Color.fromARGB(255, 18, 32, 47);
 
 void main() {
   runApp(
@@ -11,18 +14,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const title = 'Place 22';
-    return const MaterialApp(
-      home: Scaffold(
-        body: CustomScrollView(
-          slivers: [
-            SliverAppBar(
-              title: Text(title),
-              floating: true,
-              flexibleSpace: Placeholder(),
-              expandedHeight: 200,
-            )
-          ],
+    return MaterialApp(
+      theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: darkBlue),
+      debugShowCheckedModeBanner: false,home: const Scaffold(
+        body: Center(
+          child: ,
         ),
       ),
     );
