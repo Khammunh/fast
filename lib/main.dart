@@ -66,11 +66,11 @@ class MyHomePage extends StatelessWidget {
             vertical: 12,
           ),
           color: Theme.of(context).colorScheme.primary,
-          child: Text(
+          child: const Text(
             'Text with a background color',
-            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  color: Theme.of(context).colorScheme.onPrimary,
-                ),
+            
+            style: TextStyle(fontFamily: 'Tiktok')
+             
           ),
         ),
       ),
