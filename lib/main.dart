@@ -1,90 +1,69 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(
-    const MyApp(),
+    const ParentWidget(),
   );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+//Tapbox B
+
+class ParentWidget extends StatefulWidget {
+  const ParentWidget({super.key});
+
+  @override
+  State<ParentWidget> createState() => _ParentWidgetState();
+}
+
+class _ParentWidgetState extends State<ParentWidget> {
+  bool _active = false;
+  void _handleTapboxChanged(bool newValue) {
+    setState(() {
+      _active = newValue;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    const appName = 'Custom Themes';
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: appName,
-      theme: ThemeData(
-        fontFamily: 'Tiktok-Regular',
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.purple,
-          brightness: Brightness.dark,
-        ),
-        textTheme: TextTheme(
-          displayLarge: const TextStyle(
-            fontSize: 72,
-            fontWeight: FontWeight.bold,
-          ),
-          titleLarge: GoogleFonts.merriweather(),
-          displaySmall: GoogleFonts.pacifico(),
-        ),
-      ),
-      home: const MyHomePage(
-        title: appName,
+    return SizedBox(
+      child: TapboxB(
+        onChanged: _handleTapboxChanged,
+        active: _active,
       ),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  final String title;
-  const MyHomePage({
+class TapboxB extends StatelessWidget {
+  const TapboxB({
     super.key,
-    required this.title,
+    this.active = false,
+    required this.onChanged,
   });
+
+  final bool active;
+  final ValueChanged<bool> onChanged;
+  void _handleTap() {
+    onChanged(!active);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          title,
-          style: Theme.of(context)
-              .textTheme
-              .titleLarge!
-              .copyWith(color: Theme.of(context).colorScheme.onSecondary),
+    return GestureDetector(
+      onTap: _handleTap,
+      child: Container(
+        width: 200,
+        height: 200,
+        decoration: BoxDecoration(
+          color: active ? Colors.lightGreen[700] : Colors.grey[600],
         ),
-        backgroundColor: Theme.of(context).colorScheme.secondary,
-      ),
-      body: Center(
-        child: Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 12,
-            vertical: 12,
-          ),
-          color: Theme.of(context).colorScheme.primary,
-          child: const Text(
-            'Text with a background color',
-            
-            style: TextStyle(fontFamily: 'Tiktok')
-             
-          ),
-        ),
-      ),
-      floatingActionButton: Theme(
-        data: Theme.of(context).copyWith(
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.pink,
-            brightness: Brightness.dark,
-          ),
-        ),
-        child: FloatingActionButton(
-          onPressed: () {},
-          child: const Icon(
-            Icons.add,
+        child: Center(
+          child: Text(
+            active ? 'Active' : 'Inactive',
+            style: const TextStyle(
+              fontSize: 32,
+              color: Colors.white,
+            ),
           ),
         ),
       ),
