@@ -11,16 +11,28 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'GestureDetector',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('GestureDetector'),
-        ),
-        body: const Center(
-          child: MyButton(),
-        ),
+    const title = 'GestureDetector';
+    return const MaterialApp(
+      title: title,
+      home: MyHomePage(
+        title: title,
+      ),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key, required this.title});
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+      ),
+      body: const Center(
+        child: MyButton(),
       ),
     );
   }
@@ -34,18 +46,17 @@ class MyButton extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         const snackBar = SnackBar(
-          content: Text('Tag message'),
+          content: Text('Tag GestureDetector'),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       },
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: Colors.blue,
           borderRadius: BorderRadius.circular(8),
-          
+          color: Colors.red,
         ),
-        child: const Text('My Button'),
+        child: const Text('MyButton'),
       ),
     );
   }
