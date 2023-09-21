@@ -2,38 +2,34 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(
-    MyHomePage(
-      item: List<String>.generate(10, (i) => 'item $i'),
-    ),
+    const MyApp(),
   );
 }
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({
-    super.key,
-    required this.item,
-  });
-  final List<String> item;
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final items = List<String>.generate(20, (i) => 'Item ${i+1}');
   @override
   Widget build(BuildContext context) {
+    const title = 'Data List';
     return MaterialApp(
+      title: title,
+      theme: ThemeData(
+        primarySwatch: Colors.green
+      ),
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('List Again'),
+          title: const Text(title),
         ),
-        body: ListView.builder(
-            itemCount: item.length,
-            prototypeItem: ListTile(
-              title: Text(
-                item.first,
-              ),
-            ),
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(item[index]),
-              );
-            }),
+        body: ,
       ),
     );
   }
 }
+
