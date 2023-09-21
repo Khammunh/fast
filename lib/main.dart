@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const title = 'GestureDetector';
+    const title = 'InkWell Demo';
     return const MaterialApp(
       title: title,
       home: MyHomePage(
@@ -22,7 +22,10 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({
+    super.key,
+    required this.title,
+  });
   final String title;
 
   @override
@@ -32,31 +35,30 @@ class MyHomePage extends StatelessWidget {
         title: Text(title),
       ),
       body: const Center(
-        child: MyButton(),
+        child: MyInkWell(),
       ),
     );
   }
 }
 
-class MyButton extends StatelessWidget {
-  const MyButton({super.key});
+class MyInkWell extends StatelessWidget {
+  const MyInkWell({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: () {
-        const snackBar = SnackBar(
-          content: Text('Tag GestureDetector'),
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('My next Tag InkWell'),
+          ),
         );
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
       },
-      child: Container(
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          color: Colors.red,
-        ),
-        child: const Text('MyButton'),
+      child: const Padding(
+        padding: EdgeInsets.all(23),
+        
+        child: Text('MyInkWell',style: TextStyle(color: Colors.cyan),),
+        
       ),
     );
   }
