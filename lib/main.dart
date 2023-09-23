@@ -11,62 +11,37 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const title = 'Form Validation Dome';
+    const title = 'SnackBar Widgets';
     return MaterialApp(
       title: title,
       home: Scaffold(
         appBar: AppBar(
           title: const Text(title),
         ),
-        body: const MyHomePage(),
+        body: const SnackBarPage(),
       ),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+class SnackBarPage extends StatelessWidget {
+  const SnackBarPage({super.key});
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          TextFormField(
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter some text.';
-              }
-              return null;
-            },
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 8,
-              vertical: 10,
+    return Center(
+      child: ElevatedButton(
+        onPressed: () {
+          final snackBar = SnackBar(
+            content:const Text('Yay! a snackBar'),
+            action: SnackBarAction(
+              label: 'Undo',
+              onPressed: () {},
             ),
-            child: ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Processing Data'),
-                    ),
-                  );
-                }
-              },
-              child: const Text('Submit'),
-            ),
-          ),
-        ],
+          );
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        },
+        child: const Text('SnackBar'),
       ),
     );
   }
