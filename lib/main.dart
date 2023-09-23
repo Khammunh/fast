@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, unused_element, avoid_print
 
 import 'package:flutter/material.dart';
 
@@ -13,13 +13,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const titile = 'Retrieve Text Field';
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: titile,
-      theme: ThemeData(primaryColor: Colors.cyan),
-      home: const MyHomePage(
-        title: titile,
+    const title = 'Handle Change TextField';
+    return const MaterialApp(
+      title: title,
+      home: MyHomePage(
+        title: title,
       ),
     );
   }
@@ -34,6 +32,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  void _printLatesValue() {
+    final text = MyController.text;
+    print(
+      'Second text field: $text(${text.characters.length},)',
+    );
+  }
+
   final MyController = TextEditingController();
   @override
   void dispose() {
@@ -59,25 +64,10 @@ class _MyHomePageState extends State<MyHomePage> {
               controller: MyController,
               decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  hintText: 'Enter a search term'),
+                  hintText: 'Enter a Search Term'),
             ),
           ),
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  content: Text(MyController.text),
-                );
-              });
-        },
-        tooltip: 'Show me the value!',
-        child: const Icon(
-          Icons.text_fields,
-        ),
       ),
     );
   }
