@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(
@@ -11,38 +12,34 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const title = 'SnackBar Widgets';
+    const title = 'Focus Widget';
     return MaterialApp(
       title: title,
       home: Scaffold(
         appBar: AppBar(
           title: const Text(title),
         ),
-        body: const SnackBarPage(),
+        body: const Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            MyCustomWidget(),
+          ],
+        ),
       ),
     );
   }
 }
 
-class SnackBarPage extends StatelessWidget {
-  const SnackBarPage({super.key});
+class MyCustomWidget extends StatefulWidget {
+  const MyCustomWidget({super.key});
 
   @override
+  State<MyCustomWidget> createState() => _MyCustomWidgetState();
+}
+
+class _MyCustomWidgetState extends State<MyCustomWidget> {
+  @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ElevatedButton(
-        onPressed: () {
-          final snackBar = SnackBar(
-            content:const Text('Yay! a snackBar'),
-            action: SnackBarAction(
-              label: 'Undo',
-              onPressed: () {},
-            ),
-          );
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        },
-        child: const Text('SnackBar'),
-      ),
-    );
+    return Image.network('https://laosoftware-1b318.web.app/assets/gif/web.gif');
   }
 }
