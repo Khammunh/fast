@@ -1,45 +1,80 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:video_player/video_player.dart';
 
 void main() {
   runApp(
-    const MyApp(),
+    const VideoPlayerScreen(),
   );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class VideoPlayerScreen extends StatefulWidget {
+  const VideoPlayerScreen({super.key});
+
+  @override
+  State<VideoPlayerScreen> createState() => _VideoPlayerScreenState();
+}
+
+class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
+  late VideoPlayerController _controller;
+  late Future<void> _initializeVideoPlayerFuture;
+
+  @override
+  void initState() {
+    _controller = VideoPlayerController.networkUrl(
+      Uri.parse(
+          'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4'),
+    );
+    _initializeVideoPlayerFuture = _controller.initialize();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    const title = 'Focus Widget';
+    const title = 'Video Player';
     return MaterialApp(
-      title: title,
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: const Text(title),
         ),
-        body: const Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            MyCustomWidget(),
-          ],
+        body: FutureBuilder(
+          future: _initializeVideoPlayerFuture,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              return AspectRatio(
+                aspectRatio: _controller.value.aspectRatio,
+                child: VideoPlayer(_controller),
+              );
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
+        ),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(
+            _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
+          ),
+          onPressed: () {
+            setState(
+              () {
+                if (_controller.value.isPlaying) {
+                  _controller.pause();
+                } else {
+                  _controller.play();
+                }
+              },
+            );
+          },
         ),
       ),
     );
-  }
-}
-
-class MyCustomWidget extends StatefulWidget {
-  const MyCustomWidget({super.key});
-
-  @override
-  State<MyCustomWidget> createState() => _MyCustomWidgetState();
-}
-
-class _MyCustomWidgetState extends State<MyCustomWidget> {
-  @override
-  Widget build(BuildContext context) {
-    return Image.network('https://laosoftware-1b318.web.app/assets/gif/web.gif');
   }
 }
