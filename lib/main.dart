@@ -1,3 +1,4 @@
+import 'package:fast/nextpage.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
@@ -41,6 +42,21 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (content) => const NextPage(),
+                  ),
+                );
+              },
+              icon: const Icon(
+                Icons.next_plan,
+              ),
+              
+            ),
+          ],
           title: const Text(title),
         ),
         body: FutureBuilder(
