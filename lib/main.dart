@@ -1,94 +1,53 @@
-import 'package:fast/nextpage.dart';
 import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
 
 void main() {
-  runApp(
-    const VideoPlayerScreen(),
-  );
+  runApp(MaterialApp(
+    initialRoute: '/',
+    routes: {
+      '/': (context) => const MyApp(),
+      '/nextPage': (context) => const NextPage()
+    },
+  ));
 }
 
-class VideoPlayerScreen extends StatefulWidget {
-  const VideoPlayerScreen({super.key});
-
-  @override
-  State<VideoPlayerScreen> createState() => _VideoPlayerScreenState();
-}
-
-class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
-  late VideoPlayerController _controller;
-  late Future<void> _initializeVideoPlayerFuture;
-
-  @override
-  void initState() {
-    _controller = VideoPlayerController.networkUrl(
-      Uri.parse(
-          'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4'),
-    );
-    _initializeVideoPlayerFuture = _controller.initialize();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    const title = 'Video Player';
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          actions: [
-            IconButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (content) => const NextPage(),
-                  ),
-                );
-              },
-              icon: const Icon(
-                Icons.next_plan,
-              ),
-              
-            ),
-          ],
-          title: const Text(title),
-        ),
-        body: FutureBuilder(
-          future: _initializeVideoPlayerFuture,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              return AspectRatio(
-                aspectRatio: _controller.value.aspectRatio,
-                child: VideoPlayer(_controller),
-              );
-            } else {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-          },
-        ),
-        floatingActionButton: FloatingActionButton(
-          child: Icon(
-            _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
-          ),
+    const titleRouter = 'Navigator';
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(titleRouter),
+      ),
+      body: Center(
+        child: ElevatedButton(
           onPressed: () {
-            setState(
-              () {
-                if (_controller.value.isPlaying) {
-                  _controller.pause();
-                } else {
-                  _controller.play();
-                }
-              },
-            );
+            Navigator.pushNamed(context, '/nextPage');
           },
+          child: const Text('Launch Screen'),
+        ),
+      ),
+    );
+  }
+}
+
+class NextPage extends StatelessWidget {
+  const NextPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Navigator 2'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: const Text('Go back!'),
         ),
       ),
     );
