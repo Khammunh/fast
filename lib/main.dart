@@ -1,13 +1,16 @@
+import 'package:fast/nextscreen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MaterialApp(
-    initialRoute: '/',
-    routes: {
-      '/': (context) => const MyApp(),
-      '/nextPage': (context) => const NextPage()
-    },
-  ));
+  runApp(
+    MaterialApp(
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const MyApp(),
+        '/detail': (context) => const NextScreen(),
+      },
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -15,39 +18,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const titleRouter = 'Navigator';
-
+    const title = 'Navigator & Router';
     return Scaffold(
       appBar: AppBar(
-        title: const Text(titleRouter),
+        title: const Text(title),
       ),
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            Navigator.pushNamed(context, '/nextPage');
+            Navigator.pushNamed(context, '/detail');
           },
-          child: const Text('Launch Screen'),
-        ),
-      ),
-    );
-  }
-}
-
-class NextPage extends StatelessWidget {
-  const NextPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Navigator 2'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: const Text('Go back!'),
+          child: const Text('Launch Navigator'),
         ),
       ),
     );
