@@ -2,89 +2,75 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(
-    const HomeScreen(),
+    const MyApp(),
   );
 }
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  static const appTitle = 'Drawer Demo';
 
   @override
   Widget build(BuildContext context) {
-    const title = 'Returning Dat Demo';
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text(title),
-        ),
-        body: const Center(
-          child: SelectionButton(),
-        ),
+    return const MaterialApp(
+      title: appTitle,
+      home: MyHomePage(
+        title: appTitle,
       ),
     );
   }
 }
 
-class SelectionButton extends StatefulWidget {
-  const SelectionButton({super.key});
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
+  final String title;
 
   @override
-  State<SelectionButton> createState() => _SelectionButtonState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _SelectionButtonState extends State<SelectionButton> {
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      child: const Text('Pick on option, any option'),
-      onPressed: () {
-        _navigateAndDisplaySelection(context);
-      },
-    );
-  }
-}
-
-Future<void> _navigateAndDisplaySelection(BuildContext context) async {
-  final result = await Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => const SelectionScreen(),
+class _MyHomePageState extends State<MyHomePage> {
+  int _selectedIndex = 0;
+  static const TextStyle optionStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const List<Widget> _widgetOptions = <Widget>[
+    Text(
+      'Index 0: Home',
+      style: optionStyle,
     ),
-  );
-  if (!mounted) return;
-  ScaffoldMessenger.of(context).removeCurrentSnackBar() .sho;
-}
+    Text(
+      'Index 1: Business',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 2: School',
+      style: optionStyle,
+    ),
+  ];
 
-class SelectionScreen extends StatelessWidget {
-  const SelectionScreen({super.key});
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = 0;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pick on option'),
+        title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: _widgetOptions[_selectedIndex],
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context, 'Yep!');
-                },
-                child: const Text('Yep!'),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context, 'Nope!');
-                },
-                child: const Text('Nope.'),
-              ),
+            const DrawerHeader(
+              child: Text('Drawer Hearder'),
+              decoration: BoxDecoration(color: Colors.blue),
             ),
           ],
         ),
