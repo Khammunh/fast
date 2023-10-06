@@ -1,39 +1,24 @@
 import 'package:flutter/material.dart';
 
-import 'ButtonTypesExample.dart';
+import 'fabExample.dart';
 
 void main() {
   runApp(
-    const ButtonApp(),
+    const FloatingActionButtonExample(),
   );
 }
 
-class ButtonApp extends StatelessWidget {
-  const ButtonApp({super.key});
+class FloatingActionButtonExample extends StatelessWidget {
+  const FloatingActionButtonExample({super.key});
 
   @override
   Widget build(BuildContext context) {
-    const title = 'Button Types';
     return MaterialApp(
       theme: ThemeData(
         colorSchemeSeed: const Color(0xff6750a4),
         useMaterial3: true,
       ),
-      title: title,
-      home: Scaffold(
-        body: const ButtonTypesExample(),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          child: const Icon(Icons.navigate_before),
-        ),
-        bottomNavigationBar: BottomAppBar(
-          child: Container(
-            height: 50.0,
-          ),
-          color: Colors.yellowAccent,
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
-      ),
+      home: const FabExample(),
     );
   }
 }
