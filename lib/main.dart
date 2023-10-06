@@ -1,24 +1,29 @@
 import 'package:flutter/material.dart';
 
-import 'fabExample.dart';
+import 'demoIconToggleButtons.dart';
 
 void main() {
   runApp(
-    const FloatingActionButtonExample(),
+    const IconButtonToggleApp(),
   );
 }
 
-class FloatingActionButtonExample extends StatelessWidget {
-  const FloatingActionButtonExample({super.key});
+class IconButtonToggleApp extends StatelessWidget {
+  const IconButtonToggleApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    const titleIcon = 'Icon Button Type';
     return MaterialApp(
       theme: ThemeData(
-        colorSchemeSeed: const Color(0xff6750a4),
-        useMaterial3: true,
+        colorSchemeSeed:const Color(0xff6750a4),
+        useMaterial3: true
       ),
-      home: const FabExample(),
+   
+      home:  Scaffold(
+        appBar: AppBar(title:const Text(titleIcon),),
+        body:const DemoIconToggleButtons(),
+      ),
     );
   }
 }
