@@ -1,28 +1,33 @@
 import 'package:flutter/material.dart';
 
-import 'demoIconToggleButtons.dart';
-
 void main() {
   runApp(
-    const IconButtonToggleApp(),
+    const SegmentedButtonApp(),
   );
 }
 
-class IconButtonToggleApp extends StatelessWidget {
-  const IconButtonToggleApp({super.key});
+class SegmentedButtonApp extends StatelessWidget {
+  const SegmentedButtonApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    const titleIcon = 'Icon Button Type';
     return MaterialApp(
       theme: ThemeData(
-        colorSchemeSeed:const Color(0xff6750a4),
         useMaterial3: true
       ),
-   
-      home:  Scaffold(
-        appBar: AppBar(title:const Text(titleIcon),),
-        body:const DemoIconToggleButtons(),
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('SegmentedButtonApp'),
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Spacer(),
+              Text('Single choice')
+            ],
+          ),
+        ),
       ),
     );
   }
