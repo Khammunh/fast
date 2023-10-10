@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, unused_element
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -27,14 +29,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _cartItemsNo = 0;
+   int currentPageIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // bottomNavigationBar: _bottomNavigationBar(),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [_addRemoveCartButtons()],
+      bottomNavigationBar: _buttonNavigationBar(),
+      body: const Padding(
+        padding: EdgeInsets.all(2.0),
+        child: Row(
+          children: [Text('Home'),],
+        ),
       ),
     );
   }
@@ -43,11 +47,23 @@ class _HomeScreenState extends State<HomeScreen> {
 // Widget _bottomNavigationBar() {
 //   BottomNavigationBar(items: )
 // }
-
-Widget _addRemoveCartButtons() {
- return FloatingActionButton.extended(
-    onPressed: () {},
-    label: const Text('Add to cart'),
-    icon: const Icon(Icons.add),
+Widget _buttonNavigationBar() {
+  return NavigationBar(
+    destinations: const [
+      NavigationDestination(
+        icon: Icon(Icons.home),
+        label: 'Home',
+      ),
+      NavigationDestination(
+        icon: Icon(Icons.chat),
+        label: 'Chat',
+      ),
+      NavigationDestination(
+        icon: Icon(Icons.chat),
+        label: 'Chat',
+      ),
+      
+    ],
+  animationDuration: Duration(ms:2000),
   );
 }
