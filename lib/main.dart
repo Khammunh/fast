@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'progressIndicatorExample.dart';
+import 'snackBarExample.dart';
 
 void main() {
   runApp(
@@ -13,11 +13,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      debugShowCheckedModeBanner: false,theme: ThemeData(
-        useMaterial3: true,colorSchemeSeed:const Color(0xff6750a4)
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('SnackBar Example'),
+        ),
+        body: const SnackBarExample(),
       ),
-      home:const  ProgressIndicatorExampleApp(),
     );
   }
 }
