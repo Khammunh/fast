@@ -4,17 +4,20 @@ import 'progressIndicatorExample.dart';
 
 void main() {
   runApp(
-    const ProgressIndicatorApp(),
+    const MyApp(),
   );
 }
 
-class ProgressIndicatorApp extends StatelessWidget {
-  const ProgressIndicatorApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: ProgressIndicatorExample(),
+    return  MaterialApp(
+      debugShowCheckedModeBanner: false,theme: ThemeData(
+        useMaterial3: true,colorSchemeSeed:const Color(0xff6750a4)
+      ),
+      home:const  ProgressIndicatorExampleApp(),
     );
   }
 }

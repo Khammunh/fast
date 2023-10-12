@@ -2,28 +2,29 @@
 
 import 'package:flutter/material.dart';
 
-class ProgressIndicatorExample extends StatefulWidget {
-  const ProgressIndicatorExample({super.key});
+class ProgressIndicatorExampleApp extends StatefulWidget {
+  const ProgressIndicatorExampleApp({super.key});
 
   @override
-  State<ProgressIndicatorExample> createState() =>
-      _ProgressIndicatorExampleState();
+  State<ProgressIndicatorExampleApp> createState() =>
+      _ProgressIndicatorExampleAppState();
 }
 
-class _ProgressIndicatorExampleState extends State<ProgressIndicatorExample>
-    with TickerProviderStateMixin {
+class _ProgressIndicatorExampleAppState
+    extends State<ProgressIndicatorExampleApp> with TickerProviderStateMixin {
   late AnimationController controller;
+  bool determinate = false;
 
   @override
   void initState() {
     controller = AnimationController(
-        /// [AnimationController]s can be created with `vsync: this` because of
+      /// [AnimationController]s can be created with `vsync: this` because of
       /// [TickerProviderStateMixin].
       vsync: this,
-      duration: const Duration(seconds: 5),
+      duration: const Duration(seconds: 2),
     )..addListener(() {
         setState(() {});
-        controller.repeat(reverse: true);
+        controller.repeat();
         super.initState();
       });
     super.initState();
@@ -38,25 +39,46 @@ class _ProgressIndicatorExampleState extends State<ProgressIndicatorExample>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            const Text(
-              'Linear progress indicator a fixed color',
-              style: TextStyle(fontSize: 20),
-            ),
-            LinearProgressIndicator(
-              value: controller.value,
-              semanticsLabel: 'Linear progress indicator',
-            ),
-          const  CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation(Colors.green),
-            )
-          ],
-        ),
+        body: Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          const Text(
+            'Linear progress indictor',
+            style: TextStyle(fontSize: 20),
+          ),
+          const SizedBox(height: 30),
+          CircularProgressIndicator(
+            value: controller.value,
+          ),
+          const SizedBox(height: 10),
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  'determinate Mode',
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
+              ),
+              Switch(
+                  value: determinate,
+                  onChanged: (bool value) {
+                    setState(() {
+                      determinate = value;
+                      if (determinate) {
+                        controller.stop();
+                      } else {
+                        controller
+                          ..forward(from: controller.value)
+                          ..repeat();
+                      }
+                    });
+                  })
+            ],
+          )
+        ],
       ),
-    );
+    ));
   }
 }
