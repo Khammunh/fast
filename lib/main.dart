@@ -16,9 +16,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('SnackBar Example'),
+          title: const Text("SnackBar"),
         ),
-        body: const SnackBarExample(),
+        body: const Center(
+          child: SnackBarExample(),
+        ),
       ),
     );
   }

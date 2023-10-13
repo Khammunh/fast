@@ -11,10 +11,19 @@ class SnackBarExample extends StatelessWidget {
       onPressed: () {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
+            action: SnackBarAction(
+              label: 'Action',
+              onPressed: () {},
+            ),
             content: const Text('Awesome SnackBar'),
-            action: SnackBarAction(label: 'Action', onPressed: (){
-              
-            }),
+            duration: const Duration(milliseconds: 1500),
+            width: 280.0,
+            padding: const EdgeInsets.symmetric(
+              horizontal: 8.0
+            ),
+            behavior: SnackBarBehavior.floating,shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0)
+            ),
           ),
         );
       },
