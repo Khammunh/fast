@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
 
-import 'buttonSheetExample.dart';
+import 'cardExample.dart';
+
+
 
 void main() {
   runApp(
     const MyApp(),
   );
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: ButtonSheetExample(),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Card Example'),
+        ),
+        body: const CardExample(),
+      ),
     );
   }
 }
