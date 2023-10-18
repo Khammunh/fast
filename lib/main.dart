@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'dividerExample.dart';
+
 void main() {
   runApp(
     const MyApp(),
@@ -14,46 +16,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Alert Dialog Sample'),
+          title:const Text('Divider Example'),
         ),
-        body: const Center(
-          child: DialogExample(),
-        ),
+        body: const DividerExample(),
       ),
-    );
-  }
-}
-
-class DialogExample extends StatelessWidget {
-  const DialogExample({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) => AlertDialog(
-            title: const Text('Alert Dialog Title'),
-            content: const Text('Alert Dialog Description'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text('Cancel'),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text('OK'),
-              ),
-            ],
-          ),
-        );
-      },
-      child: const Text('Show Dialog'),
     );
   }
 }
