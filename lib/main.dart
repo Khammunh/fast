@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'cardExample1.dart';
-import 'cardExample2.dart';
-import 'cardExample3.dart';
-
 void main() {
   runApp(
     const MyApp(),
@@ -16,24 +12,48 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(colorSchemeSeed: const Color(0xff6750a4)),
-      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Card Example'),
+          title: const Text('Alert Dialog Sample'),
         ),
-        body: const Column(
-          children: [
-            Spacer(),
-            CardExample1(),
-            Spacer(),
-            CardExample2(),
-            Spacer(),
-            CardExample3(),
-            Spacer(),
-          ],
+        body: const Center(
+          child: DialogExample(),
         ),
       ),
+    );
+  }
+}
+
+class DialogExample extends StatelessWidget {
+  const DialogExample({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: () {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+            title: const Text('Alert Dialog Title'),
+            content: const Text('Alert Dialog Description'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+        );
+      },
+      child: const Text('Show Dialog'),
     );
   }
 }
