@@ -40,7 +40,7 @@ class ListTitleExample extends StatelessWidget {
           Card(
             child: ListTile(
               leading: FlutterLogo(),
-              title: Text('One-line with leading widget'),
+              title: Text('One-line with leading widget Hi'),
             ),
           ),
           //Now tomorrow learn Card(more_vert) again.
