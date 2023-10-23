@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'listTileExample.dart';
+
 void main() {
   runApp(
     const MyApp(),
@@ -12,39 +14,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: const ListTitleExample(),
+      home: const ListTileExample(),
       theme: ThemeData(
         useMaterial3: true,
-      ),
-    );
-  }
-}
-
-class ListTitleExample extends StatelessWidget {
-  const ListTitleExample({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('ListTitle Sample'),
-      ),
-      body: ListView(
-        children:const [
-          Card(
-            child: ListTile(
-              title: Text('One-line ListTitle'),
-            ),
-          ),
-          Card(
-            child: ListTile(
-              leading: FlutterLogo(),
-              title: Text('One-line with leading widget Hi'),
-            ),
-          ),
-          //Now tomorrow learn Card(more_vert) again.
-        ],
       ),
     );
   }
