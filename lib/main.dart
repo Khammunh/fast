@@ -1,6 +1,5 @@
+import 'package:fast/appBarExample.dart';
 import 'package:flutter/material.dart';
-
-import 'addBarExample.dart';
 
 void main() {
   runApp(
@@ -12,9 +11,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: AppBarExample(),
+     theme: ThemeData(
+      useMaterial3: true,colorSchemeSeed: const Color(0xff6750a4)
+      
+     ),
+     home: const AppBarExample(),
     );
   }
 }
